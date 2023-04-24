@@ -9,7 +9,7 @@ import {
   Button,
 } from "native-base";
 
-export default function Login() {
+export default function Login({navigation}) {
   return (
     <Box display="flex" flex={1} alignItems="center" bg="white" justifyContent="center">
       <Image
@@ -68,7 +68,7 @@ export default function Login() {
               color="danger.500"
               fontWeight="bold"
               mx={2}
-            //   onPress={() => navigation.navigate("Login")}
+              onPress={() => navigation.navigate("Register")}
             >
               Register
             </Text>
