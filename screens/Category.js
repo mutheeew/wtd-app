@@ -24,8 +24,6 @@ export default function Category(){
                     fontSize={15}
                     borderRadius="sm"
                     borderColor="muted.500"
-                    // value={dataCategory.name}
-                    // onChangeText={(value) => handleChangeText("name", value)}
                 />
                 <Button
                     w={"100%"}
@@ -37,7 +35,6 @@ export default function Category(){
                     fontSize: "md",
                     fontWeight: "bold",
                     }}
-                    // onPress={(e) => handleSubmit.mutate(e)}
                 >
                     Add Category
                 </Button>
@@ -54,29 +51,18 @@ export default function Category(){
                 w={"100%"}
                 flexWrap={"wrap"}
                 >
-                {/* {category?.map((item, i) => { */}
-                    {/* return ( */}
                     <Box
                         p={3}
                         borderRadius={10}
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        // key={i}
                         mr={2}
                         my={2}
-                        // bg={
-                        // // categoryColor?.find(
-                        // //     (item) =>
-                        // //     item.index === i % (Object.keys(categoryColor).length - 1)
-                        // // ).bgColor
-                        // }
                     >
                         <Text color="white" fontWeight="bold" fontSize={20}>
-                        {/* {item.name} */}
                         </Text>
                     </Box>
-                    {/* ); */}
                 </Box>
             </Box>
         </Box>

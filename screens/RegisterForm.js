@@ -1,15 +1,38 @@
-import * as React from "react";
-import {Image } from 'react-native';
-//Import Component Native Base
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  Box,
-  Text,
-  Input,
-  Button,
-} from "native-base";
+import React, {useState} from 'react'
+import {Image} from 'react-native';
+import {Box, Text, Input, Button} from "native-base";
+import { API } from '../config/api'
+import { useMutation } from 'react-query'
 
 export default function Register({navigation}) {
+  const [form, setForm] = useState({
+    firstName: '',
+    email: '',
+    password: '',
+  })
+
+  const handleOnChange = (name, value) =>{
+    setForm({
+      ...form,
+      [name]:value,
+    })
+  }
+
+  const handleRegister = useMutation(async (e) => {
+    try {
+      e.preventDefault()
+      const response = await API.post('/auth/register', form)
+      console.log(response)
+
+      alert('Registration Success')
+      navigation.navigate("Login")
+
+    }catch(e){
+      console.log(e)
+      alert('Registration Failed')
+    }
+  })
+
   return (
     <Box display="flex" flex={1} alignItems="center" bg="white" justifyContent="center">
       <Image
@@ -32,8 +55,9 @@ export default function Register({navigation}) {
             fontSize={15}
             borderRadius="sm"
             borderColor="muted.500"
-            // onChangeText={(value) => handleChangeText("email", value)}
-            // value={dataRegister?.email}
+            name="email"
+            value={form?.email}
+            onChangeText={(value) => handleOnChange('email', value)}
           />
           <Input
             w={"100%"}
@@ -44,8 +68,9 @@ export default function Register({navigation}) {
             fontSize={15}
             borderRadius="sm"
             borderColor="muted.500"
-            // onChangeText={(value) => handleChangeText("firstName", value)}
-            // value={dataRegister?.firstName}
+            name="firstName"
+            value={form?.firstName}
+            onChangeText={(value) => handleOnChange('firstName', value)}
           />
           <Input
             w={"100%"}
@@ -57,8 +82,9 @@ export default function Register({navigation}) {
             secureTextEntry={true}
             borderRadius="sm"
             borderColor="muted.500"
-            // onChangeText={(value) => handleChangeText("password", value)}
-            // value={dataRegister?.password}
+            name="password"
+            value={form?.password}
+            onChangeText={(value) => handleOnChange('password', value)}
           />
           <Button
             w={"100%"}
@@ -70,7 +96,7 @@ export default function Register({navigation}) {
               fontSize: "md",
               fontWeight: "bold",
             }}
-            // onPress={(e) => handleSubmit.mutate(e)}
+            onPress={(e) => handleRegister.mutate(e)}
           >
             Register
           </Button>
