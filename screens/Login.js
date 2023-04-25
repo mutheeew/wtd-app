@@ -1,15 +1,36 @@
-import * as React from "react";
+import React, {useState} from 'react'
 import {Image } from 'react-native';
-//Import Component Native Base
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  Box,
-  Text,
-  Input,
-  Button,
-} from "native-base";
+import {Box, Text, Input, Button} from "native-base";
+import { API } from '../config/api'
+import { useMutation } from 'react-query'
 
 export default function Login({navigation}) {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleOnChange = (name, value) =>{
+    setForm({
+      ...form,
+      [name]:value,
+    })
+  }
+
+  const handleLogin = useMutation(async (e) => {
+    try {
+      e.preventDefault()
+      const response = await API.post('/auth/login', form)
+      console.log(response)
+
+      alert('Login Success')
+      navigation.navigate("Todo")
+
+    }catch(e){
+      console.log(e)
+      alert('Login Failed')
+    }
+  })
   return (
     <Box display="flex" flex={1} alignItems="center" bg="white" justifyContent="center">
       <Image
@@ -32,8 +53,8 @@ export default function Login({navigation}) {
             fontSize={15}
             borderRadius="sm"
             borderColor="muted.500"
-            // onChangeText={(value) => handleChangeText("email", value)}
-            // value={dataRegister?.email}
+            value={form.email}
+            onChangeText={(value) => handleOnChange('email', value)}
           />
           <Input
             w={"100%"}
@@ -45,8 +66,8 @@ export default function Login({navigation}) {
             secureTextEntry={true}
             borderRadius="sm"
             borderColor="muted.500"
-            // onChangeText={(value) => handleChangeText("password", value)}
-            // value={dataRegister?.password}
+            value={form.password}
+            onChangeText={(value) => handleOnChange('password', value)}
           />
           <Button
             w={"100%"}
@@ -58,7 +79,7 @@ export default function Login({navigation}) {
               fontSize: "md",
               fontWeight: "bold",
             }}
-            // onPress={(e) => handleSubmit.mutate(e)}
+            onPress={(e) => handleLogin.mutate(e)}
           >
             Login
           </Button>

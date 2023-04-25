@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, Center, Image, Input, Select, Text} from "native-base";
 
-export default function Todo(){
+export default function Todo(navigation){
     return (
         <Box display="flex" flex={1} alignItems="center">
             <Box display="flex" flexDirection="row" w={"85%"} mt={10} mb={5}>
