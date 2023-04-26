@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Button, Center, Image, Input, Select, Text} from "native-base";
+import {Box, Button, Center, HStack, Image, Input, Select, Text, VStack} from "native-base";
 
 export default function Todo(navigation){
     return (
@@ -25,60 +25,20 @@ export default function Todo(navigation){
             </Box>
             <Box display="flex" w={"85%"} flexDirection="column">
                 <Box display="flex" flexDirection="row" w={"100%"}>
-                    <Input
-                        w={"100%"}
-                        bg="muted.200"
-                        placeholder="Search List..."
-                        py={3}
-                        fontSize={15}
-                        borderRadius="sm"
-                        borderColor="muted.500"
+                    <Input w={"100%"} bg="muted.200" placeholder="Search List..." py={3} fontSize={15} borderRadius="sm" borderColor="muted.500"
                     />
                 </Box>
-                <Box display="flex" flexDirection="column" w={"100%"}>
-                    <Center>
-                        <Input
-                            bg="muted.200"
-                            placeholder="Choose Date"
-                            h={50}
-                            mt={2}
-                            py={3}
-                            flex={1}
-                            fontSize={15}
-                            borderRadius="sm"
-                            borderColor="muted.500"
-                        />
-                        <Select
-                            placeholder="Category"
-                            h={50}
-                            mt={2}
-                            py={3}
-                            flex={1}
-                            bg="muted.200"
-                            fontSize={15}
-                            borderRadius="sm"
-                            borderColor="muted.500"
-                            _selectedItem={{
-                                bg: "muted.500",
-                            }}
-                        >
-                        </Select>
-                        <Select
-                            placeholder="Status"
-                            h={50}
-                            bg="muted.200"
-                            py={3}
-                            mt={2}
-                            flex={1}
-                            fontSize={15}
-                            borderRadius="sm"
-                            borderColor="muted.500"
-                            _selectedItem={{
-                                bg: "muted.500",
-                            }}
-                        >
-                        </Select>
-                    </Center>
+                <Box display="flex">
+                    <HStack space={3}>
+                        <Input bg="muted.200" placeholder="Choose Date" h={50} mt={2} py={3} flex={1} fontSize={15} borderRadius="sm" borderColor="muted.500"/>
+                        <Select placeholder="Category" h={50} mt={2} py={3} flex={1} bg="muted.200" fontSize={15} borderRadius="sm" borderColor="muted.500"></Select>
+                        <Select placeholder="Status" h={50} bg="muted.200" py={3} mt={2} flex={1} fontSize={15} borderRadius="sm" borderColor="muted.500"></Select>
+                    </HStack>
+                </Box>
+                <Box>
+                    <VStack>
+                        <Center mt={10} w={"100%"} h={'24'} bg="info.100" rounded="md" shadow={3} />
+                    </VStack>
                 </Box>
             </Box>
         </Box>

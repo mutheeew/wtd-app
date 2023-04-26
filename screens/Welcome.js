@@ -14,7 +14,7 @@ function Welcome ({ navigation }) {
       <Image source={require('../assets/welcome.png')} />
       <Image source={require('../assets/wtd.png')}/>
       <Text  marginTop={10}>Write your activity and finish your activity. Fast, Simple and Easy to Use</Text>
-      <Box marginTop={20} width="80%">
+      <Box marginTop={40} width="80%">
         <Button onPress={() => navigation.navigate("Login")}
           bg="error.500"
           py={3}
