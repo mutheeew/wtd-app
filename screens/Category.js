@@ -25,9 +25,9 @@ export default function Category(navigation){
           ...getCategory,
           [name]:value,
         })
-      }
+    }
 
-      const categoryColor = [
+    const categoryColor = [
         {
           index: 0,
           bgColor: "primary.400",
@@ -48,7 +48,7 @@ export default function Category(navigation){
           index: 4,
           bgColor: "warning.400",
         },
-      ];
+    ];
 
       console.log(getCategory)
     
