@@ -7,6 +7,8 @@ export function setAuthorization(token){
     if(!token){
         delete API.defaults.headers.common
         return
+    }else{
+
+        API.defaults.headers.common["Authorization"] = `Bearer ${token}`
     }
-    API.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }

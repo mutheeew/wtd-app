@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import {Image } from 'react-native';
 import {Box, Text, Input, Button} from "native-base";
-import { API } from '../config/api'
+import { API, setAuthorization } from '../config/api'
 import { useMutation } from 'react-query'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({navigation}) {
   const [form, setForm] = useState({
@@ -17,12 +18,31 @@ export default function Login({navigation}) {
     })
   }
 
+  const logCheck = async() => {
+    try {
+      const response = await AsyncStorage.getItem("token")
+      console.log(response)
+      if (response) {
+        setAuthorization(response);
+        navigation.navigate("Todo")
+      } else {
+        alert("Passwordnya yg bagusan dikit kek")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleLogin = useMutation(async (e) => {
     try {
       e.preventDefault()
       const response = await API.post('/auth/login', form)
       console.log(response)
 
+      if (response) {
+        await AsyncStorage.setItem("token", response.data.token)
+        logCheck()
+      }
       alert('Login Success')
       navigation.navigate("Todo")
 
