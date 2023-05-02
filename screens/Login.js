@@ -35,7 +35,7 @@ export default function Login({navigation}) {
 
   const handleLogin = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      // e.preventDefault()
       const response = await API.post('/auth/login', form)
       console.log(response)
 

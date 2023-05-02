@@ -1,16 +1,52 @@
 import React from 'react';
-import {Box, Button, Center, HStack, Image, Input, Select, Text, VStack} from "native-base";
+import {Box, Button, HStack, Image, Input, Select, Text, ScrollView, Pressable} from "native-base";
+import { useQuery } from 'react-query';
+import { API } from '../config/api'
 
-export default function Todo(navigation){
+export default function Todo({navigation}){
+    let { data: list, refetch} = useQuery(
+        "listCaches",
+        async () => {
+          let listResponse = await API.get("/List");
+          refetch()
+          return listResponse.data;
+        }
+      );
+
+
+    const todoColor = [
+        {
+          index: 0,
+          bgColor: "primary.300",
+        },
+        {
+          index: 1,
+          bgColor: "secondary.300",
+        },
+        {
+          index: 2,
+          bgColor: "tertiary.300",
+        },
+        {
+          index: 3,
+          bgColor: "danger.300",
+        },
+        {
+          index: 4,
+          bgColor: "warning.300",
+        },
+    ];
+// console.log(list.length)
+
     return (
         <Box display="flex" flex={1} alignItems="center">
             <Box display="flex" flexDirection="row" w={"85%"} mt={10} mb={5}>
                 <Box flex={1} justifyContent="center" mx={2}>
                     <Text fontWeight="bold" fontSize={30}>
-                        Hi Radif
+                        Hi Mute
                     </Text>
                     <Text fontSize={15} color="error.500">
-                        200 Lists
+                        {list.length} Lists
                     </Text>
                 </Box>
                 <Box flex={1} justifyContent="center" alignItems="flex-end" mx={2}>
@@ -36,9 +72,36 @@ export default function Todo(navigation){
                     </HStack>
                 </Box>
                 <Box>
-                    <VStack>
-                        <Center mt={10} w={"100%"} h={'24'} bg="info.100" rounded="md" shadow={3} />
-                    </VStack>
+                {/* <Pressable onPress={() =>  refetch()}><Text>refresh</Text></Pressable> */}
+                    <ScrollView h="70%">
+                        {list?.map((item, i) => {
+                            return (
+                                <Box>
+                                <Box p={3} borderRadius={10} mr={2} mt={5} h={24} 
+                                    bg={
+                                        todoColor?.find(
+                                            (item) =>
+                                            item?.index === i % (todoColor.length)
+                                        ).bgColor
+                                    }
+                                >
+                                    <Box flexDirection="row" alignItems="center" justifyContent="space-between" >
+                                        <Text bold color="black" fontSize={18} onPress={() => navigation.navigate("Detail")}>
+                                            {item.name}
+                                        </Text>
+                                        <Text>Category</Text>
+                                    </Box>
+                                    <Text color="grey" fontSize={14} >
+                                        {item.description}
+                                    </Text>
+                                    <Text color="grey" fontSize={12} pt={2} >
+                                        {item.date}
+                                    </Text>
+                                </Box>
+                                </Box>
+                            );
+                        })}
+                    </ScrollView>
                 </Box>
             </Box>
         </Box>

@@ -50,21 +50,20 @@ export default function Category(navigation){
         },
     ];
 
-      console.log(getCategory)
+    console.log(getCategory)
     
-      const handleCategory = useMutation(async (e) => {
- 
+    const handleCategory = useMutation(async (e) => {
         try {
-          const response = await API.post("/Category", getCategory)
-          console.log(response)
+        const response = await API.post("/Category", getCategory)
+        console.log(response)
     
-          alert('Add Category Success')
-          refetch()
+        alert('Add Category Success')
+        refetch()
         }catch(e){
-          console.log(e)
-          alert('Add category Failed')
+        console.log(e)
+        alert('Add category Failed')
         }
-      })
+    })
 
 
     return(

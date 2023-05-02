@@ -12,6 +12,7 @@ import Login from './screens/Login';
 import Todo from './screens/Todo'
 import Category from './screens/Category';
 import List from './screens/List'
+import Detail from './screens/Detail';
 
 
 const Stack = createStackNavigator();
@@ -53,7 +54,7 @@ function MyTab(){
             tabBarInactiveTintColor: theme.colors.muted["800"],
           })}
         >
-          <Tab.Screen name="Todo" component={Todo} options={{headerShown: false}} />
+          <Tab.Screen name="Todo" component={Todo} options={{ title:"", unmountOnBlur:true}} />
           <Tab.Screen name="List" component={List} options={{headerShown: false}} />
           <Tab.Screen name="Category" component={Category} options={{headerShown: false}} />
         </Tab.Navigator>
@@ -68,6 +69,7 @@ export default function Container(){
                 <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
                 <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
                 <Stack.Screen name="Todo" component={MyTab} options={{headerShown: false}}/>
+                <Stack.Screen name="Detail" component={Detail} options={{headerShown: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     );  

@@ -3,6 +3,7 @@ import {NativeBaseProvider} from 'native-base'
 import { QueryClient, QueryClientProvider } from "react-query";
 // import { NavigationContainer } from '@react-navigation/native';
 import Container from './Container'
+import { UserContextProvider } from './context/user';
 
 export default function App() {
   const client = new QueryClient()
@@ -10,7 +11,9 @@ export default function App() {
     // <NavigationContainer>
       <QueryClientProvider client={client}>
         <NativeBaseProvider>
-          <Container/>
+          <UserContextProvider>
+            <Container />
+          </UserContextProvider>
         </NativeBaseProvider> 
       </QueryClientProvider>
     // </NavigationContainer>

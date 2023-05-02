@@ -1,14 +1,17 @@
 import {Box, Text, Input, Button, TextArea, Select, Item, Option} from 'native-base'
-import { useState } from 'react';
+import { useState, } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { API } from '../config/api'
-export default function List(){
+
+export default function List({navigation}){
     const [getList, setList] = useState({
         name:"",
         categoryId:"",
         date:"",
         description:"",
     })
+
+    console.log(getList)
 
     const handleOnChange = (name, value) => {
         setList({
@@ -17,17 +20,21 @@ export default function List(){
         })
     }
 
-    const [getCategoryId, setCategoryId] = useState([])
-    let {data: category} = useQuery("categoryCaches", async ()=> {
+    // const [getCategoryId, setCategoryId] = useState([])
+    let {data: category, refetch} = useQuery("categoryCaches", async ()=> {
         const categoryResponse = await API.get("/Category")
+        refetch()
         return categoryResponse.data;
     })
 
     const handleList = useMutation(async (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         try{
             const response = await API.post("/List", getList)
             // console.log(response)
+            // refetch()
+            alert("Sukses menambahkan list")
+            navigation.navigate("Todo")
         } catch (error) {
             console.log(error)
             alert("Gagal menambahkan list")
